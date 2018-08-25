@@ -1,0 +1,42 @@
+===============================================
+Especificación de Requerimientos de Gilded Rose
+===============================================
+
+Hola y bienvenidos al equipo de Gilded Rose. Como sabes, somos una pequeña posada en una ubicación
+privilegiada en una prominente ciudad regentada por una amable posadera llamada Allison.
+También compramos y vendemos sólo los mejores productos. Por desgracia, la calidad de nuestros productos
+se están constantemente degradando a medida que se acercan a su fecha de caducidad. Tenemos un sistema
+que actualiza nuestro inventario. Fue desarrollado por un loco llamado Leeroy, que ha pasado a nuevas
+aventuras. Tu tarea consiste en añadir una nueva característica de nuestro sistema para que podamos
+comenzar a vender una nueva categoría de artículos.
+
+En primer lugar, una introducción a nuestro sistema:
+
+    -Todos los artículos tienen un valor "Sellin", que indica el número de días que tenemos para vender
+     el artículo
+    -Todos los artículos tienen un valor "Quality" que denota lo valioso que es el artículo
+    -Al final de cada día nuestro sistema reduce los dos valores para cada artículo
+
+Bastante simple, ¿verdad? Pues aquí es donde se pone interesante:
+
+    -Una vez que la fecha de caducidad ha pasado, la calidad se degrada dos veces más rápido
+    -La calidad de un artículo nunca es negativa
+    -"Aged Brie" en realidad aumenta en calidad cuanto más viejo se pone
+    -La calidad de un artículo nunca es más de 50
+    -"Sulfuras", al ser un objeto legendario, nunca tiene que ser vendido o disminuida su calidad
+    -"Backstage passes", como "Aged Brie", aumenta en calidad a medida que el SellIn se acerca a 0.
+    La calidad aumenta en 2 cuando faltan 10 días o menos y en 3 cuando faltan 5 días o menos, pero la
+    calidad cae a 0 después del concierto
+
+Hemos firmado recientemente un proveedor de artículos conjurados. Esto requiere una actualización
+de nuestro sistema:
+
+    -Los artículos "conjurados" se degradan en Calidad el doble de rápido que los elementos normales
+
+Siéntete libre de hacer cualquier cambio en el método UpdateQuality y añadir cualquier nuevo código
+mientras todo todavía funcione correctamente. Sin embargo, no puedes alterar la clase "Item" porque
+esa clase pertenece a un Goblin que hay en la esquina que entrará en modo de rabia y te disparará porque
+no cree en la propiedad collectiva de código.
+
+Sólo para clarificar, un Item nunca puede tener una calidad por encima de 50, sin embargo "Sulfuras" es
+un objeto legendario y su calidad es 80 y nunca se ve cambiada.

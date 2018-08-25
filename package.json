@@ -1,0 +1,30 @@
+{
+  "name": "gildedrosejs2",
+  "version": "1.0.0",
+  "description": "====================================== Gilded Rose Requirements Specification ======================================",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.2.0",
+    "jasmine-core": "^3.2.1",
+    "jasmine-node": "^1.15.0"
+  },
+  "devDependencies": {
+    "stryker": "^0.29.0",
+    "stryker-api": "^0.21.0",
+    "stryker-html-reporter": "^0.16.1",
+    "stryker-jasmine": "^0.10.1",
+    "stryker-jasmine-runner": "^0.2.1",
+    "stryker-javascript-mutator": "^0.9.1"
+  },
+  "scripts": {
+    "test": "jasmine",
+    "cover": "./node_modules/.bin/istanbul cover --include-all-sources spec/*.js",
+    "mutate": "stryker run"
+  },
+  "author": "",
+  "license": "ISC"
+}
