@@ -9,7 +9,7 @@ class DefaultItem extends Item {
         super(name, sell_in, quality);
     }
 
-    ramon () {
+    spendOneDay () {
         this.sell_in = this.sell_in - 1;
 
         if (this.quality > 0) {
@@ -28,14 +28,14 @@ class Sulfuras extends DefaultItem {
     constructor (name, sell_in, quality) {
         super(name, sell_in, quality);
     }
-    ramon () {}
+    spendOneDay () {}
 }
 
 class AgedBrie extends DefaultItem {
     constructor (name, sell_in, quality) {
         super(name, sell_in, quality);
     }
-    ramon () {
+    spendOneDay () {
         this.sell_in = this.sell_in - 1;
         if (this.quality < 50) {
             this.quality = this.quality + 1;
@@ -53,7 +53,7 @@ class BackStage extends DefaultItem {
     constructor (name, sell_in, quality) {
         super(name, sell_in, quality);
     }
-    ramon () {
+    spendOneDay () {
         this.sell_in = this.sell_in - 1;
         if (this.quality < 50) {
             this.quality = this.quality + 1;
@@ -75,35 +75,26 @@ class BackStage extends DefaultItem {
     }
 }
 
+function createItem(item) {
+    switch (item.name) {
+        case 'Sulfuras, Hand of Ragnaros':
+            return new Sulfuras(item.name,item.sell_in,item.quality);
+        case 'Backstage passes to a TAFKAL80ETC concert':
+            return new BackStage(item.name,item.sell_in,item.quality);
+        case 'Aged Brie':
+            return new AgedBrie(item.name,item.sell_in,item.quality);
+    }
 
+    return new DefaultItem(item.name,item.sell_in,item.quality);
+}
 
 this.items = [];
 
 function update_quality() {
     for (var i = 0; i < items.length; i++) {
-        var item = new DefaultItem(items[i].name,items[i].sell_in,items[i].quality);
-        try{
-            var isSulfuras = item.name === 'Sulfuras, Hand of Ragnaros';
-            var isBackstage = item.name === 'Backstage passes to a TAFKAL80ETC concert';
-            var isAgedBrie = item.name === 'Aged Brie';
-
-            if(isSulfuras) {
-                item = new Sulfuras(item.name,item.sell_in,item.quality);
-            }
-
-            if (isAgedBrie) {
-                item = new AgedBrie(item.name,item.sell_in,item.quality);
-            }
-
-            if (isBackstage) {
-                item = new BackStage(item.name,item.sell_in,item.quality);
-            }
-            item.ramon();
-
-        }finally {
-            items[i] = item;
-        }
-
+        var item = createItem(items[i]);
+        item.spendOneDay();
+        items[i] = item;
     }
 }
 
