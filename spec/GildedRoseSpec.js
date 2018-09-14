@@ -1,4 +1,5 @@
 var gilded_rose = require('../src/gilded_rose.js');
+var using = require('jasmine-data-provider');
 
 var update_quality=gilded_rose.update_quality;
 var Item=gilded_rose.Item;
@@ -61,14 +62,14 @@ describe("Generic", function() {
         expect(items[0].name).toBe(NAME);
     });
 
-    it("should ??", function() {
+    it("should work with empty items", function() {
         items = [];
         update_quality();
         expect(items.length).toBe(0);
     });
 
 
-    it("should ??", function() {
+    it("should throw an exception with items is not an array", function() {
         expect(
             function(){
                 items = undefined;
@@ -89,12 +90,13 @@ describe("Backstage", function() {
         expect(items[0].quality).toBe(QUALITY_LESS_THAN_50 + 1);
     });
 
-    it("should increase by 2 the quality when there are <= 10 days remaining", function() {
-        var SELL_IN_BETWEEN_6_AND_10 = 6;
-        var QUALITY_LESS_THAN_50 = 47;
-        items = [ new Item(BACKSTAGE_NAME, SELL_IN_BETWEEN_6_AND_10, QUALITY_LESS_THAN_50) ];
-        update_quality();
-        expect(items[0].quality).toBe(QUALITY_LESS_THAN_50 + 2);
+    using([6,7,8,9,10], function (sell_in) {
+        it("should increase by 2 the quality when there are <= 10 days remaining", function() {
+            var QUALITY_LESS_THAN_50 = 47;
+            items = [ new Item(BACKSTAGE_NAME, sell_in, QUALITY_LESS_THAN_50) ];
+            update_quality();
+            expect(items[0].quality).toBe(QUALITY_LESS_THAN_50 + 2);
+        });
     });
 
     it("should increase by 3 the quality when there are <= 5 days remaining", function() {
